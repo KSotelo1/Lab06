@@ -29,7 +29,7 @@ print(info)
 # NUNIQUE FCT
 nunique = df.nunique()
 # PRINT
-print(" The number of unique values")
+print(" Number of unique values:")
 print(nunique)
 
 
@@ -37,7 +37,7 @@ print(nunique)
 # DESCRIBE FCT
 describe = df.describe()
 # PRINT
-print(" The mathematical values")
+print(" Mathematical values")
 print(describe)
 # The describe function gives us the count, mean, standard deviation, minimum, maximum and the quartile values for both the GNI and the High Income Economy
 
@@ -65,14 +65,16 @@ print(countries_per_region)
 # b) NUMBER OF HIGH INCOME ECONOMIES 
 high_income_economies = df["High Income Economy"].value_counts()
 # PRINT
-print("There are ", high_income_economies, "high income economies.")
+print("Here are the high income economies:")
+print(high_income_economies)
 
 
 #Q8: 
 # INTERSECTION BETWEEN REGION & HIGH INCOME ECONOMY
 region_of_high_income = pd.crosstab( df["Region"], df["High Income Economy"])
 # PRINT
-print("The regions of high income are: ", region_of_high_income)
+print("Here are the regions of high income per continent: ")
+print(region_of_high_income)
 
 
 #Q9
@@ -85,13 +87,15 @@ number_countries = high_life_exp_female["Country Name"].nunique
 # LIST OF COUNTRIES
 countries_name = high_life_exp_female["Country Name"].unique
 # PRINT 
-print("There are ", number_countries, "countries where women are expected to live longer than 80 years.")
-print("Here is a list of those countries:", countries_name)
+print("Here are the countries where women are expected to live longer than 80 years.")
+print(number_countries)
+print("Here is a list of those countries:")
+print(countries_name)
 
 
 
 ##### PART 4 #####
-
+sns.set_theme(style ="darkgrid")
 #Q1: 
     
 # GNI PER CAPITA VS LIFE EXPETANCY: FEMALE
@@ -123,12 +127,12 @@ plt.show()
 #Q3: 
     
 # female life expectancy vs GNI per capita linear plot
-sns.lineplot(data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, female"], hue = "Region", ci = "sd" )
+sns.relplot(data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, female"], kind = "line",  hue = "Region", errorbar = "sd" ,)
 plt.title("Relationship between GNI per capita and life expectancy for females")
 plt.show()
 
 # male life expectancy vs GNI per capita linear plot
-sns.lineplot(data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, male"], hue = "Region", ci = "sd" )
+sns.relplot(data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, male"], kind = "line",  hue = "Region", errorbar = "sd", )
 plt.title("Relationship between GNI per capita and life expectancy for males")
 plt.show()
 
@@ -141,7 +145,7 @@ plt.title("Linear relationship between GNI per capita and life expectancy for fe
 plt.show()
 
 # GNI PER CAPITA VS LIFE EXPETANCY: MALE, BASED ON REGION -> LINEAR 
-sns.lmplot(data = df, x = df["GNI_per_capita"], y = df["Life expectancy, female"], hue = "Region")
+sns.lmplot(data = df, x = df["GNI_per_capita"], y = df["Life expectancy, female"],  hue = "Region")
 plt.title("Linear relationship between GNI per capita and life expectancy for males")
 plt.show()
 
