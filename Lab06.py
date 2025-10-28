@@ -87,7 +87,7 @@ number_countries = high_life_exp_female["Country Name"].nunique
 # LIST OF COUNTRIES
 countries_name = high_life_exp_female["Country Name"].unique
 # PRINT 
-print("Here are the countries where women are expected to live longer than 80 years.")
+print("Here are how many countries women are expected to live longer than 80 years.")
 print(number_countries)
 print("Here is a list of those countries:")
 print(countries_name)
@@ -125,75 +125,86 @@ plt.show()
 
 
 #Q3: 
-    
-# female life expectancy vs GNI per capita linear plot
-sns.relplot(data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, female"], kind = "line",  hue = "Region", errorbar = "sd" ,)
+# FEMALE LIFE EXPECTANCY VS GNI PER CAPITA LINEAR PLOT 
+sns.relplot( data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, female"], kind = "line",  hue = "Region", errorbar = "sd" ,)
 plt.title("Relationship between GNI per capita and life expectancy for females")
 plt.show()
 
-# male life expectancy vs GNI per capita linear plot
-sns.relplot(data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, male"], kind = "line",  hue = "Region", errorbar = "sd", )
+# MALE LIFE EXPECTANCY VS GNI PER CAPITA LINEAR PLOT 
+sns.relplot( data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, male"], kind = "line",  hue = "Region", errorbar = "sd", )
 plt.title("Relationship between GNI per capita and life expectancy for males")
 plt.show()
+# The standard deviations don't appear in the plot because we only have one value per row, therefore error bars aren't possible since we need more than one value to calculate the average and form the standard deviations.  The plot just forms a line with each single value.
 
 
-#Q4
-
+#Q4:
 # GNI PER CAPITA VS LIFE EXPETANCY: FEMALE, BASED ON REGION -> LINEAR
-sns.lmplot(data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, female"], hue = "Region")
+sns.lmplot( data=df,  x = 'GNI_per_capita', y = "Life expectancy, female",hue = "Region")
 plt.title("Linear relationship between GNI per capita and life expectancy for females")
 plt.show()
 
 # GNI PER CAPITA VS LIFE EXPETANCY: MALE, BASED ON REGION -> LINEAR 
-sns.lmplot(data = df, x = df["GNI_per_capita"], y = df["Life expectancy, female"],  hue = "Region")
+sns.lmplot( data = df, x = "GNI_per_capita", y = "Life expectancy, female",  hue = "Region")
 plt.title("Linear relationship between GNI per capita and life expectancy for males")
 plt.show()
 
 
 #Q5: 
-# FEMALE RELATIONSHIP PLOTS
+
 # a) Physicians and life expectancy
-sns.relplot( data = df, x = df['Physicians'], y = df["Life expectancy, female"], hue = "Region")
+# female
+sns.relplot( data = df, x = df['Physicians'], y = df["Life expectancy, female"], hue = "Region", size = "Population", col = "Region")
 plt.title("Relationship between the number of physicians and the life expectancy of females")
 plt.show()
-# b) Education and life expectancy 
-sns.relplot( data = df, x = df['Tertiary education, female'], y = df["Life expectancy, female"], hue = "Region")
-plt.title("Relationship between the tertiary education of females and the life expectancy of females")
-plt.show()
-# c) Women in national parliament and life expectancy 
-sns.relplot( data = df, x = df['Women in national parliament'], y = df["Life expectancy, female"], hue = "Region")
-plt.title("Relationship between the number of women in the national parliament and the life expectancy of females")
-plt.show()
-# d) Population and life expectancy 
-sns.relplot( data = df, x = df['Population'], y = df["Life expectancy, female"], hue = "Region")
-plt.title("Relationship between the totol population and the life expectancy of females")
-plt.show()
-# e) Intermediate region and life expectancy 
-sns.relplot( data = df, x = df['Intermediate Region'], y = df["Life expectancy, female"], hue = "Region")
-plt.title("Relationship between the intermediate region and the life expectancy of females")
-plt.show()
-
-# MALE RELATIONSHIP PLOTS
-# a) Physicians and life expectancy
-sns.relplot( data = df, x = df['Physicians'], y = df["Life expectancy, male"], hue = "Region")
+# male 
+sns.relplot( data = df, x = df['Physicians'], y = df["Life expectancy, male"], hue = "Region", size = "Population", col = "Region")
 plt.title("Relationship between the number of physicians and the life expectancy of males")
 plt.show()
+# The male and female plots have similar relationships between the number of physicians and the life expectancy, however some females life expectancy goes beyond 85 years old while male do not exceed 85 years old.
+
 # b) Education and life expectancy 
-sns.relplot( data = df, x = df['Tertiary education, male'], y = df["Life expectancy, male"], hue = "Region")
+# female 
+sns.relplot( data = df, x = df['Tertiary education, female'], y = df["Life expectancy, female"], hue = "Region", size = "Population", col = "Region")
+plt.title("Relationship between the tertiary education of females and the life expectancy of females")
+plt.show()
+# male 
+sns.relplot( data = df, x = df['Tertiary education, male'], y = df["Life expectancy, male"], hue = "Region", size = "Population", col = "Region")
 plt.title("Relationship between the tertiary education of males and the life expectancy of males")
 plt.show()
+#There is a relationship between the tertiary education depeding on the region and the amount of people (males and females) that are educated, but there are no relationship between the males and females education as females have more tertiary education. In adition, there is a clear relatinship that having access to tertiary education increases he life expectancy of both genders.
+
 # c) Women in national parliament and life expectancy 
-sns.relplot( data = df, x = df['Women in national parliament'], y = df["Life expectancy, male"], hue = "Region")
+# female 
+sns.relplot( data = df, x = df['Women in national parliament'], y = df["Life expectancy, female"], hue = "Region", size = "Population", col = "Region")
+plt.title("Relationship between the number of women in the national parliament and the life expectancy of females")
+plt.show()
+# male 
+sns.relplot( data = df, x = df['Women in national parliament'], y = df["Life expectancy, male"], hue = "Region", size = "Population", col = "Region")
 plt.title("Relationship between the number of women in the national parliament and the life expectancy of males")
 plt.show()
+#There is a relationship between the number of females and males in the national parliament that shows that some region, such as Africa, have less amount of people in the national parliament. On the other hand, other regions such as Europe have a great amount of population (both females and males) in the national parliament. This demonstrates that in both male life and female life expectancy the region someone is from has an influence on the number of poeple represented in the national parliament. Therefore, there are more people and they also have greater life expectancy.
+
 # d) Population and life expectancy 
-sns.relplot( data = df, x = df['Population'], y = df["Life expectancy, male"], hue = "Region")
+# female 
+sns.relplot( data = df, x = df['Population'], y = df["Life expectancy, female"], hue = "Region", size = "Population", col = "Region")
+plt.title("Relationship between the totol population and the life expectancy of females")
+plt.show()
+# male 
+sns.relplot( data = df, x = df['Population'], y = df["Life expectancy, male"], hue = "Region", size = "Population", col = "Region")
 plt.title("Relationship between the totol population and the life expectancy of males")
 plt.show()
-# e) Intermediate region and life expectancy 
-sns.relplot( data = df, x = df['Intermediate Region'], y = df["Life expectancy, male"], hue = "Region")
-plt.title("Relationship between the intermediate region and the life expectancy of males")
+#
+
+# e) International tourism and life expectancy 
+# female 
+sns.relplot( data = df, x = df['International tourism'], y = df["Life expectancy, female"], hue = "Region", size = "Population", col = "Region")
+plt.title("Relationship between the international tourism and the life expectancy of females")
 plt.show()
+# male 
+sns.relplot( data = df, x = df['International tourism'], y = df["Life expectancy, male"], hue = "Region", size = "Population", col = "Region")
+plt.title("Relationship between the international tourism and the life expectancy of males")
+plt.show()
+#There is a relationship betwwen similar between the males and the females international tourism and life expectancy as 
 
 
 
@@ -201,12 +212,12 @@ plt.show()
 
 # a) INTERNET USE VS EMISSIONS PER CAPITA 
 # CREATION NEW COLUMN
-df["Emissions_per_capita"] = df["Greenhouse gas emissions"] / df["Population"] 
+df["Emissions per capita"] = df["Greenhouse gas emissions"] / df["Population"] 
 # PLOT
-sns.lmplot(data = df, x = df["Internet use"], y = df["Emissions_per_capita"], hue = "Region")
-plt.title("Linear relationship between internet usage and greenhouse gas emissions per capita")
+sns.relplot(data = df, x = df["Internet use"], y = df["Emissions per capita"], hue = "Region")
+plt.title("Relationship between internet usage and greenhouse gas emissions per capita")
 plt.show()
-# There
+# It looks like there is a relationship betweeen the internet usage and greenhouse gas emissions per capita as greater internet usage releases more emissions per capita.
 
 # b) HIGH EMISSION COUNTRIES (>0.03)
 # FILTER
@@ -216,17 +227,14 @@ countries_name_emissions = high_emissions["Country Name"].unique
 print("Here is a list of the countries that have high gas emissions:", countries_name_emissions)
 
 # c) INTERNET USE VS EMISSIONS PER CAPITA, BASED ON REGION
-sns.lmplot(data = df, x = df["Internet use"], y = df["Emissions_per_capita"], hue = "Region")
-plt.title("Linear relationship between internet usage and greenhouse gas emissions per capita, based on region")
+# PLOT
+sns.relplot(data = df, x = df["Internet use"], y = df["Emissions per capita"], col = "Region" , hue = "Region")
+plt.title("Relationship between internet usage and greenhouse gas emissions per capita")
 plt.show()
-# There is alot/not much variaton of emissions per capita based on internet use, according to the region
+# By using the plot from Q6, a), and adding a column for each region, we can conclude that the variation of high emissions vs internet use depedns on the region. In fact, Asia, America and Oceania have a higher variation, while Europe and Africa have more stable variation betwwen emissions vs internet use.  
 
-#d)HIGH INCOME ECONOMIES VS HIGH GREENHOUSE GAS ECONOMIES
-# INTERSECTION BETWEEN HIGH GAS EMISSIONS AND HIGH INCOME ECONOMIES
-high_income_and_emissions = pd.crosstab( df["Greenhouse gas emissions"], df["High Income Economy"])
-print(high_income_and_emissions)
-
-
+# d) HIGH INCOME ECONOMIES VS HIGH GREENHOUSE GAS EMISSIONS
+# No. not all high income economies have high greenhouse gas emissions
 
 
 
