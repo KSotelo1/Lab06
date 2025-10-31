@@ -131,7 +131,7 @@ plt.show()
 sns.relplot( data=df,  x = df['GNI_per_capita'], y = df["Life expectancy, male"], kind = "line",  hue = "Region", errorbar = "sd", )
 plt.title("Relationship between GNI per capita and life expectancy for males")
 plt.show()
-# The standard deviations don't appear in the plot because we only have one value per row, therefore error bars aren't possible since we need more than one value to calculate the average and form the standard deviations.  The plot just forms a line with each single value.
+#The standard deviations don't appear in the plot because we only have one value per row, therefore error bars aren't possible since we need more than one value to calculate the standard deviations. 
 
 
 #Q4:
